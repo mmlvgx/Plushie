@@ -8,4 +8,4 @@ from .executable import Executable
 class Package(Struct):
     """"""
 
-    executable: Executable
+    executable: Executable | None = None

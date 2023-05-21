@@ -1,7 +1,7 @@
 {
     "executable": {
         "linux": "test1",
-        "macos": "test2",
+        "darwin": "test2",
         "windows": "test3"
     }
 }

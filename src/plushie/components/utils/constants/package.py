@@ -1,3 +1,3 @@
 """"""
 
-path = "package.plushie.json"
+PATH = "package.plushie.json"

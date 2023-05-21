@@ -1,4 +1,4 @@
 """"""
 
-name = "plushie"
-version = "0.1.0"
+NAME = "plushie"
+VERSION = "0.1.0"

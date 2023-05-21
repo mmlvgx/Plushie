@@ -2,13 +2,13 @@
 
 from requests import Session, Response
 
-from .config import scheme, domain
+from .utils.constants.rest import SCHEME, DOMAIN
 
 
 class Rest:
     """"""
 
-    url = f"{scheme}://{domain}"
+    url = f"{SCHEME}://{DOMAIN}"
 
     def __init__(self, session: Session) -> None:
         """"""

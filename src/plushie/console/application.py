@@ -2,13 +2,13 @@
 
 from cleo.application import Application
 
-from .utils.constants.application import name, version
+from .utils.constants.application import NAME, VERSION
 
 from .commands.install import Install
 from .commands.uninstall import Uninstall
 
 
-application = Application(name, version=version)
+application = Application(NAME, version=VERSION)
 
 application.add(Install())
 application.add(Uninstall())
