@@ -5,7 +5,7 @@ from cleo.helpers import argument
 
 from typing import Final
 
-from ...components.commands.install import handle
+from ...components.install import handle
 
 
 class Install(Command):

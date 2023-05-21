@@ -1,5 +1,5 @@
 {
-    "executables": {
+    "executable": {
         "linux": "test1",
         "macos": "test2",
         "windows": "test3"

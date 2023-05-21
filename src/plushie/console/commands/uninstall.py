@@ -5,7 +5,7 @@ from cleo.helpers import argument
 
 from typing import Final
 
-from ...components.commands.uninstall import handle
+from ...components.uninstall import handle
 
 
 class Uninstall(Command):

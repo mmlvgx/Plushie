@@ -2,14 +2,11 @@
 
 from cleo.application import Application
 
-from .config import application_name, application_version
+from .utils.constants.application import name, version
 
 from .commands.install import Install
 from .commands.uninstall import Uninstall
 
-
-name = application_name
-version = application_version
 
 application = Application(name, version=version)
 
