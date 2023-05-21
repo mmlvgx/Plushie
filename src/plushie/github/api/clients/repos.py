@@ -2,9 +2,9 @@
 
 from msgspec.json import decode
 
+from ..helpers.urls import repos
 from ..rest import Rest
 from ..structs.repo import Repo
-from ..helpers.urls import repos
 
 
 class Repos:

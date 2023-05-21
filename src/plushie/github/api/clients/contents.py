@@ -2,9 +2,9 @@
 
 from msgspec.json import decode
 
+from ..helpers.urls import contents
 from ..rest import Rest
 from ..structs.content import Content
-from ..helpers.urls import contents
 
 
 class Contents:

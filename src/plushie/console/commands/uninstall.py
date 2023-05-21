@@ -1,7 +1,7 @@
 """"""
 
-from cleo.commands.command import Command
 from cleo.helpers import argument
+from cleo.commands.command import Command
 
 from typing import Final
 

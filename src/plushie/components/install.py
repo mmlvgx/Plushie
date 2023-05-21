@@ -2,6 +2,7 @@
 
 from msgspec.json import decode
 
+from base64 import b64decode
 from requests import Session
 
 from .utils.constants.package import path
@@ -15,9 +16,10 @@ def handle(owner: str, repo: str) -> None:
     session = Session()
     client = Client(session)
 
-    file = client.contents.get(owner, repo=repo, path=path)
+    packageFile = client.contents.get(owner, repo=repo, path=path)
+    packageFileContent = b64decode(packageFile.content)
 
-    package = decode(file.content, type=Package)
+    package = decode(packageFileContent, type=Package)
 
     print(package.executable.linux)
     print(package.executable.macos)
