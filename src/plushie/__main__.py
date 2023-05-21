@@ -1,6 +1,6 @@
 """"""
 
-from .cli.application import run
+from .console.application import run
 
 
 run()

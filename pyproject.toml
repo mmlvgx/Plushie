@@ -5,13 +5,14 @@ description = "Package Manager"
 authors = ["mmlvgx <mmlvgx@gmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [{include = "plushie", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 cleo = "^2.0.1"
 
 [tool.poetry.scripts]
-plushie = "src.plushie"
+plushie = "src.plushie.console.application:run"
 
 [build-system]
 requires = ["poetry-core"]
