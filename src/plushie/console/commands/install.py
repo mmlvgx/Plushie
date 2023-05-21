@@ -5,7 +5,7 @@ from cleo.commands.command import Command
 
 from typing import Final
 
-from ...components.install import handle
+from ...components import install
 
 
 class Install(Command):
@@ -23,4 +23,5 @@ class Install(Command):
 
         owner, repo = package.split("/")
 
-        handle(owner, repo)
+        component = install.Install(owner, repo)
+        component.handle()

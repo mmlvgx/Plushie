@@ -5,7 +5,7 @@ from cleo.commands.command import Command
 
 from typing import Final
 
-from ...components.uninstall import handle
+from ...components import uninstall
 
 
 class Uninstall(Command):
@@ -23,4 +23,5 @@ class Uninstall(Command):
 
         owner, repo = package.split("/")
 
-        handle(owner, repo)
+        component = uninstall.Uninstall(owner, repo)
+        component.handle()

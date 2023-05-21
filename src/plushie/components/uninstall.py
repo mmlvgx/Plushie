@@ -10,42 +10,81 @@ from .utils.constants.package import PATH
 from ..structs.package import Package
 from ..structs.executable import Executable
 from ..github.api.client import Client
+from ..github.api.structs.asset import Asset
+from ..github.api.structs.release import Release
 
 
-def select(executable: Executable) -> None:
+class Uninstall:
     """"""
 
-    def handle(executable_name: str | None) -> None:
+    def __init__(self, owner: str, repo: str) -> None:
         """"""
 
-        assert executable_name
-        return executable_name
+        self.owner = owner
+        self.repo = repo
 
-    system_name = system()
+        self.session = Session()
+        self.client = Client(self.session)
 
-    linux_executable_name = executable.linux
-    darwin_executable_name = executable.darwin
-    windows_executable_name = executable.windows
+    def get_package(self) -> Package:
+        """"""
 
-    executables = {
-        "Linux": handle(linux_executable_name),
-        "Darwin": handle(darwin_executable_name),
-        "Windows": handle(windows_executable_name),
-    }
+        package_file = self.client.contents.get(self.owner, repo=self.repo, path=PATH)
+        package_file_content = b64decode(package_file.content)
 
-    return executables[system_name]
+        package = decode(package_file_content, type=Package)
 
+        return package
 
-def handle(owner: str, repo: str) -> None:
-    """"""
+    def get_executable(self, executable: Executable) -> str:
+        """"""
 
-    session = Session()
-    client = Client(session)
+        def handle(executable_name: str | None) -> None:
+            """"""
 
-    package_file = client.contents.get(owner, repo=repo, path=PATH)
-    package_file_content = b64decode(package_file.content)
+            assert executable_name
+            return executable_name
 
-    package = decode(package_file_content, type=Package)
-    executable = select(package.executable)
+        system_name = system()
 
-    print(executable)
+        linux_executable_name = executable.linux
+        darwin_executable_name = executable.darwin
+        windows_executable_name = executable.windows
+
+        executables = {
+            "Linux": handle(linux_executable_name),
+            "Darwin": handle(darwin_executable_name),
+            "Windows": handle(windows_executable_name),
+        }
+
+        return executables[system_name]
+
+    def get_release(self, name: str | None = None) -> Release:
+        """"""
+
+        releases = self.client.releases.get(self.owner, self.repo)
+
+        if name is None:
+            # Last uploaded release
+            release = releases[0]
+
+        return release
+
+    def get_asset(self, release: Release, name: str) -> Asset:
+        """"""
+
+        for asset in release:
+            if asset == name:
+                return asset
+
+    def handle(self) -> None:
+        """"""
+
+        package = self.get_package()
+        executable_name = self.get_executable(package.executable)
+
+        release = self.get_release()
+        asset = self.get_asset(release, executable_name)
+
+        print(asset.name)
+        print(asset.browser_download_url)
