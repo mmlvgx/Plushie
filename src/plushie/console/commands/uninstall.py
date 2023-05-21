@@ -1,7 +1,11 @@
 """"""
 
 from cleo.commands.command import Command
-from cleo.helpers import option
+from cleo.helpers import argument
+
+from typing import Final
+
+from ...components.commands.uninstall import handle
 
 
 class Uninstall(Command):
@@ -10,16 +14,13 @@ class Uninstall(Command):
     name = "uninstall"
     description = "This is a Uninstall command"
 
-    options = [
-        option("owner", short_name="o", description="This is a Owner option"),
-        option("repo", short_name="r", description="This is a Repo option"),
-    ]
+    arguments = [argument("package", "This is a Package argument")]
 
     def handle(self) -> None:
         """"""
 
-        owner = self.option("owner")
-        repo = self.option("repo")
+        package: Final[str] = self.argument("package")
 
-        print(owner)
-        print(repo)
+        owner, repo = package.split("/")
+
+        handle(owner, repo)
